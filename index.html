@@ -1,1 +1,633 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>ARIZONA UPGRADER</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="fog fog-1"></div>
+        <div class="fog fog-2"></div>
+        <div class="moon"></div>
+    </div>
+
+    <div class="leaves" id="leaves"></div>
+
+    <main class="container">
+
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    A
+                </div>
+
+                <div>
+
+                    <div class="brand-title">
+                        ARIZONA <span>UPGRADER</span>
+                    </div>
+
+                    <div class="brand-subtitle">
+                        LOVE SERVER • UPGRADE SYSTEM
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="online">
+
+                <span class="online-dot"></span>
+
+                <span id="onlineCount">
+                    347
+                </span>
+
+                ONLINE
+
+            </div>
+
+        </header>
+
+
+        <section class="hero">
+
+            <div class="hero-line"></div>
+
+            <h1>
+                УЛУЧШИ
+                <span>СВОЙ ПРИЗ</span>
+            </h1>
+
+            <p>
+                Выбери ставку и попробуй получить предмет дороже
+            </p>
+
+            <div class="hero-line"></div>
+
+        </section>
+
+
+        <section class="type-section">
+
+            <div class="section-title">
+                <span>01</span>
+                ТИП СТАВКИ
+            </div>
+
+            <div class="type-selector">
+
+                <button class="type active" data-type="cash">
+
+                    <div class="type-icon">
+                        ₽
+                    </div>
+
+                    <div class="type-info">
+
+                        <small>
+                            ТИП СТАВКИ
+                        </small>
+
+                        <strong>
+                            Наличка
+                        </strong>
+
+                    </div>
+
+                </button>
+
+
+                <button class="type" data-type="virtual">
+
+                    <div class="type-icon">
+                        ✦
+                    </div>
+
+                    <div class="type-info">
+
+                        <small>
+                            ТИП СТАВКИ
+                        </small>
+
+                        <strong>
+                            Виртуальная валюта
+                        </strong>
+
+                    </div>
+
+                </button>
+
+
+                <button class="type" data-type="vehicle">
+
+                    <div class="type-icon">
+                        🚗
+                    </div>
+
+                    <div class="type-info">
+
+                        <small>
+                            ТИП СТАВКИ
+                        </small>
+
+                        <strong>
+                            Машина
+                        </strong>
+
+                    </div>
+
+                </button>
+
+
+                <button class="type" data-type="property">
+
+                    <div class="type-icon">
+                        🏠
+                    </div>
+
+                    <div class="type-info">
+
+                        <small>
+                            ТИП СТАВКИ
+                        </small>
+
+                        <strong>
+                            Имущество
+                        </strong>
+
+                    </div>
+
+                </button>
+
+
+                <button class="type" data-type="item">
+
+                    <div class="type-icon">
+                        🎁
+                    </div>
+
+                    <div class="type-info">
+
+                        <small>
+                            ТИП СТАВКИ
+                        </small>
+
+                        <strong>
+                            Предмет
+                        </strong>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="upgrade-section">
+
+            <div class="upgrade-card">
+
+                <div class="card-label">
+                    <span>02</span>
+                    ВАША СТАВКА
+                </div>
+
+
+                <div class="item-card source-card">
+
+                    <div class="item-icon" id="sourceIcon">
+                        ₽
+                    </div>
+
+
+                    <div class="item-content">
+
+                        <div class="item-name" id="sourceName">
+                            1.000.000$
+                        </div>
+
+                        <div class="item-price">
+                            <span id="sourcePrice">
+                                1 000 000$
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="select-button"
+                        id="sourceButton"
+                    >
+                        ВЫБРАТЬ
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="upgrade-center">
+
+                <div class="arrow-circle">
+                    ↑
+                </div>
+
+                <div class="upgrade-text">
+                    UPGRADE
+                </div>
+
+            </div>
+
+
+            <div class="upgrade-card">
+
+                <div class="card-label">
+                    <span>03</span>
+                    ЖЕЛАЕМЫЙ ПРИЗ
+                </div>
+
+
+                <div class="item-card target-card">
+
+                    <div class="item-icon" id="targetIcon">
+                        🎁
+                    </div>
+
+
+                    <div class="item-content">
+
+                        <div class="item-name" id="targetName">
+                            BMW X6
+                        </div>
+
+                        <div class="item-price">
+
+                            <span id="targetPrice">
+                                1 960 000$
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="select-button"
+                        id="targetButton"
+                    >
+                        ВЫБРАТЬ
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="chance-panel">
+
+            <div class="chance-left">
+
+                <div class="chance-title">
+                    ШАНС НА УСПЕХ
+                </div>
+
+                <div
+                    class="chance-value"
+                    id="chanceValue"
+                >
+                    50.0%
+                </div>
+
+            </div>
+
+
+            <div class="chance-bar">
+
+                <div
+                    class="chance-fill"
+                    id="chanceFill"
+                    style="width: 50%"
+                ></div>
+
+            </div>
+
+
+            <div class="chance-info">
+                <span id="multiplierText">
+                    МНОЖИТЕЛЬ x1.96
+                </span>
+            </div>
+
+        </section>
+
+
+        <button
+            class="upgrade-button"
+            id="upgradeButton"
+        >
+
+            <span class="upgrade-button-main">
+                ИСПЫТАТЬ УДАЧУ
+            </span>
+
+            <span class="upgrade-button-sub">
+                ПРОКРУТИТЬ UPGRADE
+            </span>
+
+        </button>
+
+
+        <section class="stats">
+
+            <div class="stat">
+
+                <span>
+                    ПОПЫТОК
+                </span>
+
+                <strong id="attempts">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    ПОБЕД
+                </span>
+
+                <strong id="wins">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    ПОРАЖЕНИЙ
+                </span>
+
+                <strong id="losses">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    WINRATE
+                </span>
+
+                <strong id="winrate">
+                    0%
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <section class="info-box">
+
+            <div class="info-icon">
+                !
+            </div>
+
+            <div>
+
+                <strong>
+                    Как это работает?
+                </strong>
+
+                <p>
+                    Выберите категорию ставки, укажите предмет
+                    или сумму, затем выберите любой желаемый приз.
+                    Чем выше стоимость приза относительно ставки,
+                    тем ниже шанс выигрыша.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <div class="footer-logo">
+                ARIZONA <span>UPGRADER</span>
+            </div>
+
+            <div class="footer-line"></div>
+
+            <div class="creator">
+
+                Создатель
+                <b>Vladislav_Lyashov</b>
+
+                <span>|</span>
+
+                Игра возможна только с сервера
+                <b>Love</b>
+
+            </div>
+
+            <div class="footer-small">
+                FAN-MADE PROJECT • НЕ ЯВЛЯЕТСЯ ОФИЦИАЛЬНЫМ САЙТОМ ARIZONA RP
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+
+    <div
+        class="modal hidden"
+        id="selectionModal"
+    >
+
+        <div class="modal-overlay"></div>
+
+
+        <div class="modal-window">
+
+            <button
+                class="modal-close"
+                id="modalClose"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-header">
+
+                <span id="modalNumber">
+                    02
+                </span>
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        ВЫБЕРИТЕ СТАВКУ
+                    </h2>
+
+                    <p id="modalSubtitle">
+                        Выберите предмет для игры
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="modal-list"
+                id="modalList"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ПРОКРУТКА -->
+
+    <div
+        class="roll-screen hidden"
+        id="rollScreen"
+    >
+
+        <div class="roll-dark"></div>
+
+
+        <div class="roll-content">
+
+            <div class="roll-title">
+                UPGRADE
+            </div>
+
+            <div class="roll-subtitle">
+                Система определяет результат...
+            </div>
+
+
+            <div class="roll-machine">
+
+                <div class="roll-pointer"></div>
+
+                <div
+                    class="roll-track"
+                    id="rollTrack"
+                ></div>
+
+            </div>
+
+
+            <div class="roll-loading">
+
+                <div class="loading-bar">
+
+                    <div id="loadingFill"></div>
+
+                </div>
+
+                <span id="loadingText">
+                    ПРОКРУТКА...
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- РЕЗУЛЬТАТ -->
+
+    <div
+        class="result-screen hidden"
+        id="resultScreen"
+    >
+
+        <div class="result-bg"></div>
+
+
+        <div class="result-box">
+
+            <div
+                class="result-status"
+                id="resultStatus"
+            >
+                ВЫИГРЫШ
+            </div>
+
+
+            <div
+                class="result-icon"
+                id="resultIcon"
+            >
+                🎃
+            </div>
+
+
+            <div
+                class="result-title"
+                id="resultTitle"
+            >
+                ВЫ ВЫИГРАЛИ!
+            </div>
+
+
+            <div
+                class="result-name"
+                id="resultName"
+            >
+                BMW X6
+            </div>
+
+
+            <div
+                class="result-price"
+                id="resultPrice"
+            >
+                1 960 000$
+            </div>
+
+
+            <button
+                class="result-button"
+                id="resultButton"
+            >
+                ПРОДОЛЖИТЬ
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
