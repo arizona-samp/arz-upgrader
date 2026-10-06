@@ -1,85 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /*
-     * ============================
-     * ДАННЫЕ
-     * ============================
-     */
-
     const ITEMS = {
-
         vehicle: [
-            {
-                name: "BMW M5",
-                price: 4500000,
-                icon: "🚗"
-            },
-            {
-                name: "Mercedes-Benz G63",
-                price: 8000000,
-                icon: "🚙"
-            },
-            {
-                name: "Lamborghini Urus",
-                price: 12000000,
-                icon: "🏎️"
-            },
-            {
-                name: "Bugatti Chiron",
-                price: 25000000,
-                icon: "🏎️"
-            }
+            { name: "BMW M5", price: 4500000, icon: "🚗" },
+            { name: "Mercedes-Benz G63", price: 8000000, icon: "🚙" },
+            { name: "Lamborghini Urus", price: 12000000, icon: "🏎️" },
+            { name: "Bugatti Chiron", price: 25000000, icon: "🏎️" }
         ],
 
         property: [
-            {
-                name: "Квартира",
-                price: 3000000,
-                icon: "🏠"
-            },
-            {
-                name: "Дом",
-                price: 7500000,
-                icon: "🏡"
-            },
-            {
-                name: "Особняк",
-                price: 15000000,
-                icon: "🏰"
-            },
-            {
-                name: "Бизнес",
-                price: 30000000,
-                icon: "🏢"
-            }
+            { name: "Квартира", price: 3000000, icon: "🏠" },
+            { name: "Дом", price: 7500000, icon: "🏡" },
+            { name: "Особняк", price: 15000000, icon: "🏰" },
+            { name: "Бизнес", price: 30000000, icon: "🏢" }
         ],
 
         item: [
-            {
-                name: "Редкий предмет",
-                price: 500000,
-                icon: "🎁"
-            },
-            {
-                name: "Премиум предмет",
-                price: 1500000,
-                icon: "💎"
-            },
-            {
-                name: "Эксклюзив",
-                price: 5000000,
-                icon: "👑"
-            }
+            { name: "Редкий предмет", price: 500000, icon: "🎁" },
+            { name: "Премиум предмет", price: 1500000, icon: "💎" },
+            { name: "Эксклюзив", price: 5000000, icon: "👑" }
         ]
-
     };
-
-
-    /*
-     * ============================
-     * СОСТОЯНИЕ
-     * ============================
-     */
 
     let currentType = "virtual";
 
@@ -100,13 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let attempts = 0;
     let wins = 0;
     let losses = 0;
-
-
-    /*
-     * ============================
-     * ЭЛЕМЕНТЫ
-     * ============================
-     */
 
     const onlineEl = document.getElementById("online");
 
@@ -195,152 +129,99 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("closeResult");
 
 
-    /*
-     * ============================
-     * ФОРМАТИРОВАНИЕ
-     * ============================
-     */
+    /* =========================
+       ФОРМАТИРОВАНИЕ
+    ========================= */
 
     function formatMoney(value) {
-
         return Number(value || 0).toLocaleString("ru-RU");
-
     }
 
 
-    /*
-     * ============================
-     * РАСЧЁТ
-     * ============================
-     *
-     * 2% преимущество сайта.
-     *
-     * Шанс = 98 / множитель
-     *
-     * Например:
-     *
-     * x1.96 = 50%
-     * x3.266 = 30%
-     * x6.533 = 15%
-     * x19.6 = 5%
-     */
+    /* =========================
+       РАСЧЁТ
+    ========================= */
 
     function calculateMultiplier() {
 
-        const sourceValue =
-            Number(sourceItem.price) || 0;
-
-        const targetValue =
-            Number(targetItem.price) || 0;
+        const sourceValue = Number(sourceItem.price) || 0;
+        const targetValue = Number(targetItem.price) || 0;
 
         if (sourceValue <= 0 || targetValue <= 0) {
             return 0;
         }
 
         return targetValue / sourceValue;
-
     }
 
 
     function calculateChance() {
 
-        const multiplier =
-            calculateMultiplier();
+        const multiplier = calculateMultiplier();
 
         if (multiplier <= 0) {
             return 0;
         }
 
-        return Math.min(
-            98,
-            98 / multiplier
-        );
-
+        return Math.min(98, 98 / multiplier);
     }
 
 
-    /*
-     * ============================
-     * ОБНОВЛЕНИЕ UI
-     * ============================
-     */
+    /* =========================
+       UI
+    ========================= */
 
     function updateCards() {
 
-        sourceIcon.textContent =
-            sourceItem.icon;
-
-        sourceName.textContent =
-            sourceItem.name;
-
+        sourceIcon.textContent = sourceItem.icon;
+        sourceName.textContent = sourceItem.name;
         sourcePrice.textContent =
             "$" + formatMoney(sourceItem.price);
 
-
-        targetIcon.textContent =
-            targetItem.icon;
-
-        targetName.textContent =
-            targetItem.name;
-
+        targetIcon.textContent = targetItem.icon;
+        targetName.textContent = targetItem.name;
         targetPrice.textContent =
             "$" + formatMoney(targetItem.price);
-
     }
 
 
     function updateChance() {
 
-        const multiplier =
-            calculateMultiplier();
-
-        const chance =
-            calculateChance();
-
+        const multiplier = calculateMultiplier();
+        const chance = calculateChance();
 
         multiplierEl.textContent =
-            "x" + (
+            "x" +
+            (
                 multiplier > 0
                     ? multiplier.toFixed(2)
                     : "0.00"
             );
 
-
         chanceValueEl.textContent =
-            Math.min(98, chance).toFixed(1) + "%";
-
+            chance.toFixed(1) + "%";
     }
 
 
     function updateStats() {
 
-        attemptsEl.textContent =
-            attempts;
-
-        winsEl.textContent =
-            wins;
-
-        lossesEl.textContent =
-            losses;
-
+        attemptsEl.textContent = attempts;
+        winsEl.textContent = wins;
+        lossesEl.textContent = losses;
 
         const winrate =
             attempts > 0
                 ? (wins / attempts) * 100
                 : 0;
 
-
         winrateEl.textContent =
             winrate.toFixed(1) + "%";
-
     }
 
 
-    /*
-     * ============================
-     * ТИПЫ
-     * ============================
-     */
+    /* =========================
+       КАТЕГОРИИ
+    ========================= */
 
     typeButtons.forEach(button => {
 
@@ -352,15 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             button.classList.add("active");
 
-
-            currentType =
-                button.dataset.type;
-
+            currentType = button.dataset.type;
 
             if (currentType === "virtual") {
 
-                virtualBox.style.display =
-                    "block";
+                virtualBox.style.display = "block";
 
                 sourceItem = {
                     name: "Виртуальная валюта",
@@ -369,194 +246,142 @@ document.addEventListener("DOMContentLoaded", () => {
                     icon: "💰"
                 };
 
+                const multiplier =
+                    98 / selectedChance;
+
                 targetItem = {
                     name: "Виртуальная валюта",
                     price:
-                        sourceItem.price * 1.96,
+                        Math.round(
+                            sourceItem.price * multiplier
+                        ),
                     icon: "💰"
                 };
 
             } else {
 
-                virtualBox.style.display =
-                    "none";
+                virtualBox.style.display = "none";
 
-
-                const list =
-                    ITEMS[currentType];
-
+                const list = ITEMS[currentType];
 
                 if (list && list.length) {
 
-                    sourceItem =
-                        { ...list[0] };
+                    sourceItem = {
+                        ...list[0]
+                    };
 
-                    targetItem =
-                        {
-                            ...list[1] || list[0]
-                        };
-
+                    targetItem = {
+                        ...list[1] || list[0]
+                    };
                 }
-
             }
-
 
             updateCards();
             updateChance();
-
         });
 
     });
 
 
-    /*
-     * ============================
-     * ВИРТУАЛЬНАЯ ВАЛЮТА
-     * ============================
-     */
+    /* =========================
+       СУММА СТАВКИ
+    ========================= */
 
-    virtualAmount.addEventListener(
-        "input",
-        () => {
+    virtualAmount.addEventListener("input", () => {
 
-            let value =
-                Number(virtualAmount.value);
+        let value = Number(
+            virtualAmount.value
+        );
+
+        if (!value || value < 1) {
+            value = 1;
+        }
+
+        sourceItem = {
+            name: "Виртуальная валюта",
+            price: value,
+            icon: "💰"
+        };
+
+        const multiplier =
+            98 / selectedChance;
+
+        targetItem = {
+            name: "Виртуальная валюта",
+            price:
+                Math.round(
+                    value * multiplier
+                ),
+            icon: "💰"
+        };
+
+        updateCards();
+        updateChance();
+    });
 
 
-            if (!value || value < 1) {
-                value = 1;
+    /* =========================
+       ИСТОЧНИК
+    ========================= */
+
+    sourceButton.addEventListener("click", () => {
+
+        if (currentType === "virtual") {
+
+            virtualAmount.focus();
+
+            return;
+        }
+
+        openModal(
+            "Выберите ставку",
+            currentType,
+            item => {
+
+                sourceItem = {
+                    ...item
+                };
+
+                updateCards();
+                updateChance();
             }
+        );
+    });
 
 
-            sourceItem = {
+    /* =========================
+       ЦЕЛЬ
+    ========================= */
 
-                name: "Виртуальная валюта",
+    targetButton.addEventListener("click", () => {
 
-                price: value,
+        openTargetModal();
 
-                icon: "💰"
-
-            };
-
-
-            /*
-             * Если пользователь меняет
-             * сумму ставки, сохраняем
-             * выбранный процент.
-             */
-
-            const multiplier =
-                98 / selectedChance;
+    });
 
 
-            targetItem = {
-
-                name: "Виртуальная валюта",
-
-                price:
-                    Math.round(
-                        value * multiplier
-                    ),
-
-                icon: "💰"
-
-            };
-
-
-            updateCards();
-            updateChance();
-
-        }
-    );
-
-
-    /*
-     * ============================
-     * КНОПКА ИСТОЧНИКА
-     * ============================
-     */
-
-    sourceButton.addEventListener(
-        "click",
-        () => {
-
-            if (currentType === "virtual") {
-
-                virtualAmount.focus();
-
-                return;
-
-            }
-
-
-            openModal(
-                "Выберите ставку",
-                currentType,
-                item => {
-
-                    sourceItem =
-                        { ...item };
-
-                    updateCards();
-                    updateChance();
-
-                }
-            );
-
-        }
-    );
-
-
-    /*
-     * ============================
-     * КНОПКА ЦЕЛИ
-     * ============================
-     */
-
-    targetButton.addEventListener(
-        "click",
-        () => {
-
-            openTargetModal();
-
-        }
-    );
-
-
-    /*
-     * ============================
-     * МОДАЛКА ИСТОЧНИКА
-     * ============================
-     */
+    /* =========================
+       ОБЫЧНАЯ МОДАЛКА
+    ========================= */
 
     function openModal(title, type, callback) {
 
-        modalTitle.textContent =
-            title;
+        modalTitle.textContent = title;
 
-        modalList.innerHTML =
-            "";
+        modalList.innerHTML = "";
 
-
-        const list =
-            ITEMS[type] || [];
-
+        const list = ITEMS[type] || [];
 
         list.forEach(item => {
 
             const button =
                 document.createElement("button");
 
+            button.type = "button";
 
-            button.type =
-                "button";
-
-            button.className =
-                "modal-item";
-
+            button.className = "modal-item";
 
             button.innerHTML = `
-
                 <div class="modal-item-icon">
                     ${item.icon}
                 </div>
@@ -570,142 +395,197 @@ document.addEventListener("DOMContentLoaded", () => {
                         $${formatMoney(item.price)}
                     </div>
                 </div>
-
             `;
 
+            button.addEventListener("click", () => {
 
-            button.addEventListener(
-                "click",
-                () => {
+                callback(item);
 
-                    callback(item);
-
-                    closeModal();
-
-                }
-            );
-
+                closeModal();
+            });
 
             modalList.appendChild(button);
-
         });
 
-
-        modalOverlay.classList.add(
-            "active"
-        );
-
+        modalOverlay.classList.add("active");
     }
 
 
-    /*
-     * ============================
-     * МОДАЛКА ЦЕЛИ
-     * ============================
-     */
+    /* =========================
+       МОДАЛКА ЦЕЛИ
+       БЕЗ PROMPT()
+    ========================= */
 
     function openTargetModal() {
 
         modalTitle.textContent =
             "Выберите цель";
 
-        modalList.innerHTML =
-            "";
+        modalList.innerHTML = "";
 
 
-        /*
-         * Виртуальная валюта
-         */
+        /* ВИРТУАЛЬНАЯ ВАЛЮТА */
 
-        const virtualButton =
-            document.createElement("button");
+        const virtualBlock =
+            document.createElement("div");
 
-
-        virtualButton.type =
-            "button";
-
-        virtualButton.className =
-            "modal-item";
+        virtualBlock.style.padding = "5px 0 12px";
 
 
-        virtualButton.innerHTML = `
-
-            <div class="modal-item-icon">
-                💰
+        virtualBlock.innerHTML = `
+            <div style="
+                color:#77777e;
+                font-size:10px;
+                font-weight:800;
+                letter-spacing:1px;
+                margin-bottom:8px;
+            ">
+                ВИРТУАЛЬНАЯ ВАЛЮТА
             </div>
 
-            <div>
-                <div class="modal-item-name">
-                    Виртуальная валюта
+            <div style="
+                display:flex;
+                gap:8px;
+            ">
+
+                <div style="
+                    flex:1;
+                    height:45px;
+                    display:flex;
+                    align-items:center;
+                    padding:0 12px;
+                    background:#08080b;
+                    border:1px solid #29292f;
+                    border-radius:8px;
+                ">
+
+                    <span style="
+                        color:#777;
+                        margin-right:7px;
+                    ">
+                        $
+                    </span>
+
+                    <input
+                        id="targetVirtualAmount"
+                        type="number"
+                        min="1"
+                        placeholder="Введите сумму"
+                        style="
+                            width:100%;
+                            border:none;
+                            outline:none;
+                            background:transparent;
+                            color:#fff;
+                            font-size:13px;
+                            font-weight:700;
+                        "
+                    >
+
                 </div>
 
-                <div class="modal-item-price">
-                    Введите сумму самостоятельно
-                </div>
+                <button
+                    id="targetVirtualConfirm"
+                    type="button"
+                    style="
+                        width:90px;
+                        border:none;
+                        border-radius:8px;
+                        background:#8e1717;
+                        color:#fff;
+                        font-size:10px;
+                        font-weight:900;
+                    "
+                >
+                    ВЫБРАТЬ
+                </button>
+
             </div>
-
         `;
 
 
-        virtualButton.addEventListener(
+        modalList.appendChild(
+            virtualBlock
+        );
+
+
+        const targetInput =
+            document.getElementById(
+                "targetVirtualAmount"
+            );
+
+        const targetConfirm =
+            document.getElementById(
+                "targetVirtualConfirm"
+            );
+
+
+        targetInput.value =
+            targetItem.name ===
+            "Виртуальная валюта"
+                ? targetItem.price
+                : "";
+
+
+        targetConfirm.addEventListener(
             "click",
             () => {
 
                 const value =
-                    prompt(
-                        "Введите сумму виртуальной валюты:"
+                    Number(
+                        targetInput.value
                     );
 
 
-                if (value !== null) {
+                if (
+                    !Number.isFinite(value) ||
+                    value <= 0
+                ) {
 
-                    const number =
-                        Number(
-                            value.replace(/\s/g, "")
-                        );
+                    targetInput.focus();
 
-
-                    if (
-                        Number.isFinite(number) &&
-                        number > 0
-                    ) {
-
-                        targetItem = {
-
-                            name:
-                                "Виртуальная валюта",
-
-                            price:
-                                number,
-
-                            icon:
-                                "💰"
-
-                        };
-
-
-                        updateCards();
-                        updateChance();
-
-                    }
-
+                    return;
                 }
 
 
-                closeModal();
+                targetItem = {
 
+                    name:
+                        "Виртуальная валюта",
+
+                    price:
+                        value,
+
+                    icon:
+                        "💰"
+                };
+
+
+                updateCards();
+                updateChance();
+
+                closeModal();
             }
         );
 
 
+        /* РАЗДЕЛ */
+
+        const separator =
+            document.createElement("div");
+
+        separator.style.cssText = `
+            height:1px;
+            background:#242429;
+            margin:4px 0 12px;
+        `;
+
         modalList.appendChild(
-            virtualButton
+            separator
         );
 
 
-        /*
-         * Остальные категории
-         */
+        /* МАШИНЫ / ИМУЩЕСТВО / ПРЕДМЕТЫ */
 
         [
             "vehicle",
@@ -718,16 +598,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const button =
                     document.createElement("button");
 
-
-                button.type =
-                    "button";
+                button.type = "button";
 
                 button.className =
                     "modal-item";
 
-
                 button.innerHTML = `
-
                     <div class="modal-item-icon">
                         ${item.icon}
                     </div>
@@ -741,25 +617,22 @@ document.addEventListener("DOMContentLoaded", () => {
                             $${formatMoney(item.price)}
                         </div>
                     </div>
-
                 `;
-
 
                 button.addEventListener(
                     "click",
                     () => {
 
-                        targetItem =
-                            { ...item };
+                        targetItem = {
+                            ...item
+                        };
 
                         updateCards();
                         updateChance();
 
                         closeModal();
-
                     }
                 );
-
 
                 modalList.appendChild(
                     button
@@ -774,21 +647,24 @@ document.addEventListener("DOMContentLoaded", () => {
             "active"
         );
 
+
+        setTimeout(() => {
+
+            targetInput.focus();
+
+        }, 50);
     }
 
 
-    /*
-     * ============================
-     * ЗАКРЫТИЕ МОДАЛКИ
-     * ============================
-     */
+    /* =========================
+       ЗАКРЫТИЕ
+    ========================= */
 
     function closeModal() {
 
         modalOverlay.classList.remove(
             "active"
         );
-
     }
 
 
@@ -808,86 +684,66 @@ document.addEventListener("DOMContentLoaded", () => {
             ) {
 
                 closeModal();
-
             }
 
         }
     );
 
 
-    /*
-     * ============================
-     * КНОПКИ ШАНСА
-     * ============================
-     */
+    /* =========================
+       ШАНСЫ
+    ========================= */
 
     chanceButtons.forEach(button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+        button.addEventListener("click", () => {
 
-                chanceButtons.forEach(btn => {
-                    btn.classList.remove("active");
-                });
+            chanceButtons.forEach(btn => {
+                btn.classList.remove("active");
+            });
 
-                button.classList.add("active");
+            button.classList.add("active");
 
-
-                selectedChance =
-                    Number(
-                        button.dataset.chance
-                    );
+            selectedChance =
+                Number(
+                    button.dataset.chance
+                );
 
 
-                const sourceValue =
-                    Number(sourceItem.price);
+            const sourceValue =
+                Number(sourceItem.price);
 
 
-                /*
-                 * Автоматический множитель
-                 */
-
-                const multiplier =
-                    98 / selectedChance;
+            const multiplier =
+                98 / selectedChance;
 
 
-                /*
-                 * Автоматически создаём
-                 * виртуальную цель.
-                 */
+            targetItem = {
 
-                targetItem = {
+                name:
+                    "Виртуальная валюта",
 
-                    name:
-                        "Виртуальная валюта",
+                price:
+                    Math.round(
+                        sourceValue *
+                        multiplier
+                    ),
 
-                    price:
-                        Math.round(
-                            sourceValue *
-                            multiplier
-                        ),
-
-                    icon:
-                        "💰"
-
-                };
+                icon:
+                    "💰"
+            };
 
 
-                updateCards();
-                updateChance();
-
-            }
-        );
+            updateCards();
+            updateChance();
+        });
 
     });
 
 
-    /*
-     * ============================
-     * УЛУЧШЕНИЕ
-     * ============================
-     */
+    /* =========================
+       УЛУЧШЕНИЕ
+    ========================= */
 
     upgradeButton.addEventListener(
         "click",
@@ -895,7 +751,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const sourceValue =
                 Number(sourceItem.price);
-
 
             const targetValue =
                 Number(targetItem.price);
@@ -907,9 +762,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 !targetValue ||
                 targetValue <= 0
             ) {
-
                 return;
-
             }
 
 
@@ -921,97 +774,81 @@ document.addEventListener("DOMContentLoaded", () => {
                 chance <= 0 ||
                 chance > 98
             ) {
-
                 return;
-
             }
 
 
-            upgradeButton.disabled =
-                true;
+            upgradeButton.disabled = true;
 
             upgradeButton.style.opacity =
                 "0.6";
 
 
-            setTimeout(
-                () => {
+            setTimeout(() => {
 
-                    attempts++;
-
-
-                    /*
-                     * Случайное число
-                     * от 0 до 100.
-                     */
-
-                    const roll =
-                        Math.random() * 100;
+                attempts++;
 
 
-                    const win =
-                        roll <= chance;
+                const roll =
+                    Math.random() * 100;
 
 
-                    if (win) {
-
-                        wins++;
-
-
-                        resultIcon.textContent =
-                            "🎃";
-
-                        resultTitle.textContent =
-                            "ВЫИГРЫШ";
-
-                        resultText.textContent =
-                            `Вы получили ${targetItem.name} на сумму $${formatMoney(targetValue)}!`;
-
-                    } else {
-
-                        losses++;
+                const win =
+                    roll <= chance;
 
 
-                        resultIcon.textContent =
-                            "💀";
+                if (win) {
 
-                        resultTitle.textContent =
-                            "ПРОИГРЫШ";
+                    wins++;
 
-                        resultText.textContent =
-                            `К сожалению, попытка не удалась. Шанс был ${chance.toFixed(1)}%.`;
+                    resultIcon.textContent =
+                        "🎃";
 
-                    }
+                    resultTitle.textContent =
+                        "ВЫИГРЫШ";
+
+                    resultText.textContent =
+                        `Вы получили ${targetItem.name} на сумму $${formatMoney(targetValue)}!`;
+
+                } else {
+
+                    losses++;
+
+                    resultIcon.textContent =
+                        "💀";
+
+                    resultTitle.textContent =
+                        "ПРОИГРЫШ";
+
+                    resultText.textContent =
+                        `Попытка не удалась. Шанс был ${chance.toFixed(1)}%.`;
+                }
 
 
-                    updateStats();
+                updateStats();
 
 
-                    resultOverlay.classList.add(
-                        "active"
-                    );
+                resultOverlay.classList.add(
+                    "active"
+                );
 
 
-                    upgradeButton.disabled =
-                        false;
+                upgradeButton.disabled =
+                    false;
 
-                    upgradeButton.style.opacity =
-                        "1";
+                upgradeButton.style.opacity =
+                    "1";
 
 
-                },
-                650
-            );
+            }, 650);
 
         }
     );
 
 
-    /*
-     * ============================
-     * РЕЗУЛЬТАТ
-     * ============================
-     */
+    /* =========================
+       РЕЗУЛЬТАТ
+    ========================= */
 
     closeResult.addEventListener(
         "click",
@@ -1020,7 +857,6 @@ document.addEventListener("DOMContentLoaded", () => {
             resultOverlay.classList.remove(
                 "active"
             );
-
         }
     );
 
@@ -1037,18 +873,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 resultOverlay.classList.remove(
                     "active"
                 );
-
             }
-
         }
     );
 
 
-    /*
-     * ============================
-     * ONLINE
-     * ============================
-     */
+    /* =========================
+       ONLINE
+    ========================= */
 
     function updateOnline() {
 
@@ -1057,10 +889,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 Math.random() * 431
             ) + 100;
 
-
         onlineEl.textContent =
             value;
-
     }
 
 
@@ -1072,29 +902,22 @@ document.addEventListener("DOMContentLoaded", () => {
             ) + 8000;
 
 
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                updateOnline();
+            updateOnline();
 
-                scheduleOnline();
+            scheduleOnline();
 
-            },
-            delay
-        );
-
+        }, delay);
     }
 
 
-    /*
-     * ============================
-     * СТАРТ
-     * ============================
-     */
+    /* =========================
+       СТАРТ
+    ========================= */
 
     virtualBox.style.display =
         "block";
-
 
     updateCards();
     updateChance();
