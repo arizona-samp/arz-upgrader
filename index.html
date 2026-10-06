@@ -1,1 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arizona Upgrader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+
+<div class="background"></div>
+<div class="falling-leaves" id="fallingLeaves"></div>
+
+<header class="header">
+
+    <div class="logo">
+        <div class="logo-icon">🎃</div>
+
+        <div>
+            <div class="logo-title">ARIZONA</div>
+            <div class="logo-subtitle">UPGRADER</div>
+        </div>
+    </div>
+
+    <div class="header-right">
+
+        <div class="account-info" id="depositButton">
+            <div class="deposit-title">ПОПОЛНЕНИЕ СЧЁТА</div>
+            <div class="balance-text">
+                Баланс: <strong id="balanceValue">0$</strong>
+            </div>
+        </div>
+
+        <div class="online">
+            <span class="online-dot"></span>
+            <span>ONLINE</span>
+            <strong id="onlineCount">245</strong>
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="title-block">
+        <h1>UPGRADER</h1>
+        <p>Попробуй улучшить свой предмет</p>
+    </div>
+
+
+    <div class="type-selector">
+
+        <button class="type-btn active" data-type="virtual">
+            <span class="type-icon">💵</span>
+            <span>Виртуальная валюта</span>
+        </button>
+
+        <button class="type-btn" data-type="vehicle">
+            <span class="type-icon">🚗</span>
+            <span>Машина</span>
+        </button>
+
+        <button class="type-btn" data-type="property">
+            <span class="type-icon">🏠</span>
+            <span>Имущество</span>
+        </button>
+
+        <button class="type-btn" data-type="item">
+            <span class="type-icon">💎</span>
+            <span>Предмет</span>
+        </button>
+
+    </div>
+
+
+    <section class="upgrader">
+
+        <div class="item-side">
+
+            <div class="side-label">ВАШ ПРЕДМЕТ</div>
+
+            <div class="selected-card" id="sourceCard">
+                <div class="card-icon" id="sourceIcon">💵</div>
+
+                <div class="card-info">
+                    <div class="card-name" id="sourceName">
+                        Виртуальная валюта
+                    </div>
+
+                    <div class="card-price" id="sourcePrice">
+                        $1,000,000
+                    </div>
+                </div>
+
+                <button class="change-btn" id="sourceChange">
+                    ИЗМЕНИТЬ
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="upgrade-center">
+
+            <div class="chance-buttons">
+
+                <button class="chance-btn" data-chance="5">5%</button>
+                <button class="chance-btn" data-chance="15">15%</button>
+                <button class="chance-btn" data-chance="30">30%</button>
+                <button class="chance-btn active" data-chance="50">50%</button>
+                <button class="chance-btn" data-chance="75">75%</button>
+
+            </div>
+
+
+            <div class="virtual-input-wrap" id="virtualInputWrap">
+
+                <label>СУММА СТАВКИ</label>
+
+                <div class="virtual-input">
+                    <span>$</span>
+                    <input
+                        type="number"
+                        id="virtualAmount"
+                        min="1"
+                        value="1000000"
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="multiplier">
+                <span id="multiplierValue">x1.96</span>
+            </div>
+
+            <div class="actual-chance">
+                ШАНС НА УСПЕХ:
+                <strong id="chanceValue">50%</strong>
+            </div>
+
+
+            <button class="upgrade-btn" id="upgradeButton">
+                <span>УЛУЧШИТЬ</span>
+                <span class="upgrade-arrow">→</span>
+            </button>
+
+        </div>
+
+
+        <div class="item-side">
+
+            <div class="side-label">ВОЗМОЖНЫЙ ПРИЗ</div>
+
+            <div class="selected-card" id="targetCard">
+
+                <div class="card-icon" id="targetIcon">💵</div>
+
+                <div class="card-info">
+                    <div class="card-name" id="targetName">
+                        Виртуальная валюта
+                    </div>
+
+                    <div class="card-price" id="targetPrice">
+                        $1,960,000
+                    </div>
+                </div>
+
+                <button class="change-btn" id="targetChange">
+                    ИЗМЕНИТЬ
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="stats">
+
+        <div class="stat">
+            <span>ВСЕГО ПОПЫТОК</span>
+            <strong id="totalAttempts">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>ПОБЕД</span>
+            <strong id="wins">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>ПОРАЖЕНИЙ</span>
+            <strong id="losses">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>ВИНРЕЙТ</span>
+            <strong id="winrate">0%</strong>
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ROLL SCREEN -->
+
+<div class="roll-screen hidden" id="rollScreen">
+
+    <div class="roll-box">
+
+        <div class="roll-title">
+            ПРОВЕРКА УДАЧИ
+        </div>
+
+        <div class="roll-window">
+
+            <div class="roll-track" id="rollTrack"></div>
+
+            <div class="roll-center"></div>
+
+        </div>
+
+        <div class="roll-line"></div>
+
+    </div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div class="result-overlay hidden" id="resultOverlay">
+
+    <div class="result-box">
+
+        <div class="result-icon" id="resultIcon">🎃</div>
+
+        <div class="result-title" id="resultTitle">
+            ВЫИГРЫШ
+        </div>
+
+        <div class="result-text" id="resultText">
+            Поздравляем!
+        </div>
+
+        <button class="result-close" id="resultClose">
+            ПРОДОЛЖИТЬ
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ITEM SELECT MODAL -->
+
+<div class="modal hidden" id="itemModal">
+
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="modal-title" id="modalTitle">
+                    ВЫБЕРИТЕ ПРЕДМЕТ
+                </div>
+
+                <div class="modal-subtitle">
+                    Выберите нужный вариант
+                </div>
+            </div>
+
+            <button class="modal-close" id="modalClose">
+                ×
+            </button>
+
+        </div>
+
+        <div class="modal-items" id="modalItems"></div>
+
+    </div>
+
+</div>
+
+
+<!-- DEPOSIT MODAL -->
+
+<div class="deposit-modal hidden" id="depositModal">
+
+    <div class="deposit-overlay" id="depositOverlay"></div>
+
+    <div class="deposit-box">
+
+        <div class="deposit-header">
+
+            <div>
+                <div class="deposit-modal-title">
+                    ПОПОЛНЕНИЕ СЧЁТА
+                </div>
+
+                <div class="deposit-modal-subtitle">
+                    Выберите способ пополнения
+                </div>
+            </div>
+
+            <button class="deposit-close" id="depositClose">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="deposit-methods">
+
+            <button
+                class="deposit-method active"
+                data-method="accessories"
+                id="accessoriesMethod"
+            >
+                🎩 Аксессуары
+            </button>
+
+            <button
+                class="deposit-method"
+                data-method="virtual"
+                id="virtualMethod"
+            >
+                💵 Виртуальная валюта
+            </button>
+
+        </div>
+
+
+        <div class="deposit-content" id="depositContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast hidden" id="toast"></div>
+
+
+<footer class="footer">
+
+    <div>
+        Создатель Vladislav_Lyashov |
+        Игра возможна только с сервера Love
+    </div>
+
+    <div class="footer-brand">
+        🎃 ARIZONA UPGRADER
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
