@@ -3,100 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ARIZONA UPGRADER</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header class="header">
-    <div class="logo">
-        <div class="logo-icon">🎃</div>
-
+    <div class="brand">
+        <div class="brand-icon">🎃</div>
         <div>
-            <div class="logo-title">ARIZONA</div>
-            <div class="logo-subtitle">UPGRADER</div>
+            <div class="brand-title">ARIZONA</div>
+            <div class="brand-subtitle">UPGRADER</div>
         </div>
     </div>
 
     <div class="online">
         <span class="online-dot"></span>
         ONLINE:
-        <span id="online">320</span>
+        <strong id="online">320</strong>
     </div>
 </header>
-
 
 <main class="container">
 
     <div class="categories">
-
         <button class="type-btn active" data-type="virtual" type="button">
-            <span>💰</span>
-            <b>Виртуальная валюта</b>
+            <span>💰</span> Виртуальная валюта
         </button>
 
         <button class="type-btn" data-type="vehicle" type="button">
-            <span>🚗</span>
-            <b>Машина</b>
+            <span>🚗</span> Машина
         </button>
 
         <button class="type-btn" data-type="property" type="button">
-            <span>🏠</span>
-            <b>Имущество</b>
+            <span>🏠</span> Имущество
         </button>
 
         <button class="type-btn" data-type="item" type="button">
-            <span>🎁</span>
-            <b>Предмет</b>
+            <span>🎁</span> Предмет
         </button>
-
     </div>
-
 
     <section class="upgrade-area">
 
-        <!-- SOURCE -->
-
-        <div class="item-card">
-
-            <div class="card-label">
-                ВАША СТАВКА
+        <div class="upgrade-side">
+            <div class="side-title">
+                <span>ВАША СТАВКА</span>
+                <button id="changeSource" class="change-btn" type="button">
+                    ИЗМЕНИТЬ
+                </button>
             </div>
 
-            <button class="item-button" id="changeSource" type="button">
+            <div class="selected-card" id="sourceCard">
+                <div class="selected-icon" id="sourceIcon">💰</div>
 
-                <div class="item-icon" id="sourceIcon">
-                    💰
-                </div>
-
-                <div class="item-info">
-                    <div class="item-name" id="sourceName">
+                <div class="selected-info">
+                    <div class="selected-name" id="sourceName">
                         Виртуальная валюта
                     </div>
 
-                    <div class="item-price" id="sourcePrice">
+                    <div class="selected-price" id="sourcePrice">
                         $1 000 000
                     </div>
                 </div>
 
-                <div class="change-arrow">
-                    ›
-                </div>
+                <div class="arrow">›</div>
+            </div>
 
-            </button>
+            <div class="virtual-box" id="virtualBox">
+                <div class="input-label">СУММА СТАВКИ</div>
 
-
-            <div class="virtual-input" id="virtualBox">
-
-                <div class="input-label">
-                    Сумма ставки
-                </div>
-
-                <div class="input-wrapper">
-
+                <div class="money-input">
                     <span>$</span>
 
                     <input
@@ -106,33 +83,23 @@
                         value="1000000"
                         placeholder="Введите сумму"
                     >
-
                 </div>
-
             </div>
-
         </div>
-
-
-        <!-- CENTER -->
 
         <div class="upgrade-center">
 
-            <div class="chance-title">
-                ШАНС
-            </div>
+            <div class="chance-label">ШАНС</div>
 
             <div class="multiplier" id="multiplier">
                 x1.96
             </div>
 
-            <div class="chance-value" id="chanceValue">
-                50%
+            <div class="chance" id="chance">
+                50.0%
             </div>
 
-
             <div class="chance-buttons">
-
                 <button class="chance-btn" data-chance="5" type="button">
                     5%
                 </button>
@@ -152,102 +119,109 @@
                 <button class="chance-btn" data-chance="75" type="button">
                     75%
                 </button>
-
             </div>
 
-
             <button class="upgrade-button" id="upgradeButton" type="button">
-                УЛУЧШИТЬ
+                <span>УЛУЧШИТЬ</span>
+                <span class="upgrade-arrow">→</span>
             </button>
 
         </div>
 
+        <div class="upgrade-side">
 
-        <!-- TARGET -->
+            <div class="side-title">
+                <span>ЦЕЛЬ</span>
 
-        <div class="item-card">
-
-            <div class="card-label">
-                ВЫ ПОЛУЧИТЕ
+                <button id="changeTarget" class="change-btn" type="button">
+                    ИЗМЕНИТЬ
+                </button>
             </div>
 
-            <button class="item-button" id="changeTarget" type="button">
+            <div class="selected-card" id="targetCard">
 
-                <div class="item-icon" id="targetIcon">
+                <div class="selected-icon" id="targetIcon">
                     💰
                 </div>
 
-                <div class="item-info">
+                <div class="selected-info">
 
-                    <div class="item-name" id="targetName">
+                    <div class="selected-name" id="targetName">
                         Виртуальная валюта
                     </div>
 
-                    <div class="item-price" id="targetPrice">
+                    <div class="selected-price" id="targetPrice">
                         $1 960 000
                     </div>
 
                 </div>
 
-                <div class="change-arrow">
-                    ›
-                </div>
+                <div class="arrow">›</div>
 
-            </button>
+            </div>
 
         </div>
 
     </section>
 
-
-    <!-- STATS -->
-
     <section class="stats">
 
         <div class="stat">
-            <span>ПОПЫТКИ</span>
-            <b id="attempts">0</b>
+            <span>ПОПЫТОК</span>
+            <strong id="attempts">0</strong>
         </div>
 
         <div class="stat">
-            <span>ПОБЕДЫ</span>
-            <b id="wins">0</b>
+            <span>ВЫИГРЫШЕЙ</span>
+            <strong id="wins">0</strong>
         </div>
 
         <div class="stat">
-            <span>ПОРАЖЕНИЯ</span>
-            <b id="losses">0</b>
+            <span>ПРОИГРЫШЕЙ</span>
+            <strong id="losses">0</strong>
         </div>
 
         <div class="stat">
             <span>WINRATE</span>
-            <b id="winrate">0%</b>
+            <strong id="winrate">0%</strong>
         </div>
 
     </section>
 
 </main>
 
+<footer>
+    <div class="footer-text">
+        Создатель Vladislav_Lyashov | Игра возможна только с сервера Love
+    </div>
+
+    <div class="footer-logo">
+        ARIZONA UPGRADER
+    </div>
+</footer>
+
 
 <!-- MODAL -->
 
-<div class="modal-overlay" id="modalOverlay">
+<div class="modal hidden" id="modal">
 
-    <div class="modal" id="selectionModal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <div class="modal-window">
 
         <div class="modal-header">
 
-            <div class="modal-title" id="modalTitle">
+            <h2 id="modalTitle">
                 Выберите предмет
-            </div>
+            </h2>
 
-            <button id="modalClose" type="button">
+            <button id="closeModal" type="button">
                 ×
             </button>
 
         </div>
 
-        <div class="modal-list" id="modalList"></div>
+        <div class="modal-items" id="modalItems"></div>
 
     </div>
 
@@ -256,9 +230,9 @@
 
 <!-- RESULT -->
 
-<div class="result-overlay" id="result">
+<div class="result hidden" id="result">
 
-    <div class="result-box">
+    <div class="result-window">
 
         <div class="result-icon" id="resultIcon">
             🎃
@@ -279,20 +253,6 @@
     </div>
 
 </div>
-
-
-<footer>
-
-    <div>
-        Создатель Vladislav_Lyashov |
-        Игра возможна только с сервера Love
-    </div>
-
-    <strong>
-        ARIZONA UPGRADER
-    </strong>
-
-</footer>
 
 
 <script src="script.js"></script>
