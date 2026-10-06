@@ -766,6 +766,10 @@ body {
 
 /* MODAL */
 
+.modal.hidden {
+    display: none !important;
+}
+
 .modal {
     position: fixed;
 
@@ -1026,4 +1030,112 @@ footer {
         font-size: 9px;
     }
 
+}
+
+
+/* INLINE TARGET INPUT */
+
+.target-money-box {
+    padding: 12px;
+    margin-bottom: 10px;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 11px;
+
+    background: #0e1016;
+}
+
+.target-money-title {
+    margin-bottom: 8px;
+
+    color: #777c87;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.2px;
+}
+
+.target-money-row {
+    display: flex;
+
+    gap: 8px;
+}
+
+.target-money-input-wrap {
+    min-width: 0;
+
+    flex: 1;
+
+    height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 12px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 9px;
+
+    background: #080a0f;
+}
+
+.target-money-input-wrap span {
+    margin-right: 6px;
+
+    color: #777c87;
+}
+
+.target-money-input-wrap input {
+    width: 100%;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+.target-money-input-wrap input::-webkit-inner-spin-button,
+.target-money-input-wrap input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+#targetVirtualApply {
+    width: 90px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: #e95118;
+
+    color: #fff;
+
+    font-size: 9px;
+
+    font-weight: 900;
+}
+
+.modal-section-title {
+    margin: 8px 2px;
+
+    color: #666b76;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.2px;
 }
